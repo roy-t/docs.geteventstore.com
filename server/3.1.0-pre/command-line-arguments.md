@@ -74,6 +74,7 @@ The following parameters are supported by the Event Store:
 |-Config<br/>--config=VALUE<br/>|CONFIG|Config|Configuration files. |
 |-Defines<br/>--defines=VALUE<br/>|DEFINES|Defines|Run-time conditionals. (Default: n/a) |
 |-WhatIf<br/>--what-if=VALUE<br/>|WHAT_IF|WhatIf|Print effective configuration to console and then exit. (Default: False) |
+|-DevelopmentMode<br/>--development-mode=VALUE<br/>|DEVELOPMENT_MODE|DevelopmentMode|Enable development mode. This disables caching on events over HTTP. (Default: False) |
 |-MonoMinThreadpoolSize<br/>--mono-min-threadpool-size=VALUE<br/>|MONO_MIN_THREADPOOL_SIZE|MonoMinThreadpoolSize|Minimum number of worker threads when running under mono. Set to 0 to leave machine defaults. (Default: 10) |
 |-Force<br/>--force=VALUE<br/>|FORCE|Force|Force the Event Store to run in possibly harmful environments such as with Boehm GC. (Default: False) |
 |-StatsPeriodSec<br/>--stats-period-sec=VALUE<br/>|STATS_PERIOD_SEC|StatsPeriodSec|The number of seconds between statistics gathers. (Default: 30) |
@@ -129,14 +130,17 @@ The following parameters are supported by the Event Store:
 ###Interface Options
 | Parameter | Environment *(all prefixed with EVENTSTORE_)* | Yaml | Description |
 | --------- | --------------------------------------------- | ---- | ----------- |
-|-IntIp<br/>--int-ip=VALUE<br/>|INT_IP|IntIp|Internal IP Address. (Default: 127.0.0.1) |
-|-ExtIp<br/>--ext-ip=VALUE<br/>|EXT_IP|ExtIp|External IP Address. (Default: 127.0.0.1) |
+|-IntIp<br/>--int-ip=VALUE<br/>|INT_IP|IntIp|Internal IP Address. (Default: 0.0.0.0) |
+|-ExtIp<br/>--ext-ip=VALUE<br/>|EXT_IP|ExtIp|External IP Address. (Default: 0.0.0.0) |
 |-IntHttpPort<br/>--int-http-port=VALUE<br/>|INT_HTTP_PORT|IntHttpPort|Internal HTTP Port. (Default: 2112) |
 |-ExtHttpPort<br/>--ext-http-port=VALUE<br/>|EXT_HTTP_PORT|ExtHttpPort|External HTTP Port. (Default: 2113) |
 |-IntTcpPort<br/>--int-tcp-port=VALUE<br/>|INT_TCP_PORT|IntTcpPort|Internal TCP Port. (Default: 1112) |
 |-IntSecureTcpPort<br/>--int-secure-tcp-port=VALUE<br/>|INT_SECURE_TCP_PORT|IntSecureTcpPort|Internal Secure TCP Port. (Default: 0) |
 |-ExtTcpPort<br/>--ext-tcp-port=VALUE<br/>|EXT_TCP_PORT|ExtTcpPort|External TCP Port. (Default: 1113) |
 |-ExtSecureTcpPort<br/>--ext-secure-tcp-port=VALUE<br/>|EXT_SECURE_TCP_PORT|ExtSecureTcpPort|External Secure TCP Port. (Default: 0) |
+|-ExtIpAdvertiseAs<br/>--ext-ip-advertise-as=VALUE<br/>|EXT_IP_ADVERTISE_AS|ExtIpAdvertiseAs|Advertise External Tcp Address As. |
+|-ExtTcpPortAdvertiseAs<br/>--ext-tcp-port-advertise-as=VALUE<br/>|EXT_TCP_PORT_ADVERTISE_AS|ExtTcpPortAdvertiseAs|Advertise External Tcp Port As. (Default: 0) |
+|-ExtHttpPortAdvertiseAs<br/>--ext-http-port-advertise-as=VALUE<br/>|EXT_HTTP_PORT_ADVERTISE_AS|ExtHttpPortAdvertiseAs|Advertise External Http Port As. (Default: 0) |
 |-IntTcpHeartbeatTimeout<br/>--int-tcp-heartbeat-timeout=VALUE<br/>|INT_TCP_HEARTBEAT_TIMEOUT|IntTcpHeartbeatTimeout|Heartbeat timeout for internal TCP sockets (Default: 700) |
 |-ExtTcpHeartbeatTimeout<br/>--ext-tcp-heartbeat-timeout=VALUE<br/>|EXT_TCP_HEARTBEAT_TIMEOUT|ExtTcpHeartbeatTimeout|Heartbeat timeout for external TCP sockets (Default: 1000) |
 |-IntTcpHeartbeatInterval<br/>--int-tcp-heartbeat-interval=VALUE<br/>|INT_TCP_HEARTBEAT_INTERVAL|IntTcpHeartbeatInterval|Heartbeat interval for internal TCP sockets (Default: 700) |
@@ -144,8 +148,10 @@ The following parameters are supported by the Event Store:
 |-AdminOnExt<br/>--admin-on-ext=VALUE<br/>|ADMIN_ON_EXT|AdminOnExt|Whether or not to run the admin ui on the external http endpoint (Default: True) |
 |-StatsOnExt<br/>--stats-on-ext=VALUE<br/>|STATS_ON_EXT|StatsOnExt|Whether or not to accept statistics requests on the external http endpoint, needed if you use admin ui (Default: True) |
 |-GossipOnExt<br/>--gossip-on-ext=VALUE<br/>|GOSSIP_ON_EXT|GossipOnExt|Whether or not to accept gossip requests on the external http endpoint (Default: True) |
-|-HttpPrefixes<br/>--http-prefixes=VALUE<br/>|HTTP_PREFIXES|HttpPrefixes|The prefixes that the http server should respond to. (Default: n/a) |
+|-IntHttpPrefixes<br/>--int-http-prefixes=VALUE<br/>|INT_HTTP_PREFIXES|IntHttpPrefixes|The prefixes that the internal http server should respond to. (Default: n/a) |
+|-ExtHttpPrefixes<br/>--ext-http-prefixes=VALUE<br/>|EXT_HTTP_PREFIXES|ExtHttpPrefixes|The prefixes that the external http server should respond to. (Default: n/a) |
 |-EnableTrustedAuth<br/>--enable-trusted-auth=VALUE<br/>|ENABLE_TRUSTED_AUTH|EnableTrustedAuth|Enables trusted authentication by an intermediary in the Http (Default: False) |
+|-AddInterfacePrefixes<br/>--add-interface-prefixes=VALUE<br/>|ADD_INTERFACE_PREFIXES|AddInterfacePrefixes|Add interface prefixes (Default: True) |
 |-UseInternalSsl<br/>--use-internal-ssl=VALUE<br/>|USE_INTERNAL_SSL|UseInternalSsl|Whether to use secure internal communication. (Default: False) |
 |-SslTargetHost<br/>--ssl-target-host=VALUE<br/>|SSL_TARGET_HOST|SslTargetHost|Target host of server's SSL certificate. (Default: n/a) |
 |-SslValidateServer<br/>--ssl-validate-server=VALUE<br/>|SSL_VALIDATE_SERVER|SslValidateServer|Whether to validate that server's certificate is trusted. (Default: True) |
